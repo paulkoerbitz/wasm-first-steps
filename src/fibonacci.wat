@@ -1,0 +1,21 @@
+(module
+    (func $fib (param $n i32) (result i32)
+        (local $last i32)
+        (local $curr i32)
+        (local $buff i32)
+        (set_local $last (i32.const 1))
+        (set_local $curr (i32.const 1))
+        (block
+            (loop
+                (br_if 1 (i32.le_s (get_local $n) (i32.const 2)))
+                (set_local $buff (i32.add (get_local $last) (get_local $curr)))
+                (set_local $last (get_local $curr))
+                (set_local $curr (get_local $buff))
+                (set_local $n (i32.sub (get_local $n) (i32.const 1)))
+                (br 0)
+            )
+        )
+        (get_local $curr)
+    )
+    (export "fib" (func $fib))
+)
